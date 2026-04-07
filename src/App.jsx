@@ -15,7 +15,6 @@ export default function App() {
   const [newTask, setNewTask] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [filter, setFilter] = useState("all");
-
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
   const [editingDueDate, setEditingDueDate] = useState("");
@@ -29,7 +28,7 @@ export default function App() {
       text: value,
       done: false,
       createdAt: new Date().toLocaleString(),
-      dueDate: dueDate,
+      dueDate,
       reminder: false,
     };
 
@@ -74,11 +73,7 @@ export default function App() {
     setTasks(
       tasks.map((task) =>
         task.id === editingId
-          ? {
-              ...task,
-              text: editingText.trim(),
-              dueDate: editingDueDate,
-            }
+          ? { ...task, text: editingText.trim(), dueDate: editingDueDate }
           : task
       )
     );
@@ -146,10 +141,7 @@ export default function App() {
           <button onClick={() => setFilter("active")} style={styles.filterButton}>
             Active
           </button>
-          <button
-            onClick={() => setFilter("completed")}
-            style={styles.filterButton}
-          >
+          <button onClick={() => setFilter("completed")} style={styles.filterButton}>
             Completed
           </button>
         </div>
@@ -205,10 +197,7 @@ export default function App() {
                       </div>
 
                       <div>
-                        <button
-                          onClick={() => startEdit(task)}
-                          style={styles.iconButton}
-                        >
+                        <button onClick={() => startEdit(task)} style={styles.iconButton}>
                           Edit
                         </button>
                         <button
